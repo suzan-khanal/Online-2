@@ -44,22 +44,28 @@
 
 </script> -->
 
+<?php
+$valueToSearch = $_GET['ValueToSearch'] ?? "";
+$status = $_GET['fetchby'] ?? "";
 
-
+?>
 
 
 
 <?php
-if(isset($_POST['Search_Btn']))
+if(isset($_GET['Search_Btn']))
 {
-$valueToSearch = $_POST['ValueToSearch'];
-$query = "SELECT * FROM `elections` WHERE CONCAT ( `Election_Topic`)LIKE '%".$valueToSearch."%'";
+
+$valueToSearch = $_GET['ValueToSearch'];
+$status = $_GET['fetchby'];
+$query = "SELECT * FROM `elections` WHERE (('$status' = '') or  (Status = '$status'))and CONCAT ( `Election_Topic`)LIKE '%".$valueToSearch."%'";
 // mysqli_query($con, $query);
  $search_result = filterTable($query);
 
 //  ,`Status`
 
 }
+// 
 else
 {
 
@@ -146,21 +152,25 @@ if(isset($_GET['Updated']))
     <div class="col-8">
         <h3>Upcoming Elections</h3>
         
-
+        
 
 
         <div class="container" id="table">
-        <form action="index.php?AddElectionPage=1" method="POST">
+        <form action="index.php?AddElectionPage=1" method="GET">
         <div id="ab">Fetch Result By:</div>
-        <select id="fetchval" name="fetchby" >
-            <!-- <option value="" >Select Status</option> -->
-            <option value="Active" >Active</option>
-            <option value="Inactive" >Inactive</option>
-            <option value="Expired" >Expired</option>
+        <select id="fetchval" name="fetchby">
+            <option <?= $status == '' ? "selected" : "" ?> value="" >Select Status</option>
+            <option <?= $status == 'Active' ? "selected" : "" ?> value="Active" >Active</option>
+            <option <?= $status == 'Inactive' ? "selected" : "" ?> value="Inactive"  >Inactive</option>
+            <option <?= $status == 'Expired' ? "selected" : "" ?> value="Expired" >Expired</option>
 
 </select>
 <!-- <br> -->
-            <input type="text" name="ValueToSearch" placeholder="Search Here" />
+<!-- value="
+
+// $valueToSearch " -->
+            <input type="text" name="ValueToSearch" placeholder="Search Here" value="<?= $valueToSearch?>" />
+            <input type="hidden"  name="AddElectionPage"value="1">
             <input type="submit" value="Filter"  name="Search_Btn" class="btn btn-primary" /><br><br>
             
         <table class="table">
