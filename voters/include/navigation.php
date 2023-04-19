@@ -8,6 +8,10 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+
+    <li class="nav-item">
+        <a class="nav-link text-white mr-3" href="Homepage.php">Homepage</a>
+      </li>
     
       <li class="nav-item">
         <a class="nav-link text-white mr-3" href="Voter_Dashboard.php">Home</a>

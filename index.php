@@ -276,7 +276,9 @@ else if(isset($_POST['login-btn']))
 				$_SESSION['Key'] == "VotersKey";
 
 				?>
-				<script> location.assign("voters/Voter_Dashboard.php")</script>
+				<!-- <script> location.assign("voters/Voter_Dashboard.php")</script> -->
+				<<script> location.assign("voters/Homepage.php")</script>
+
 
 
 
