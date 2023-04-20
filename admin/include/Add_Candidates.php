@@ -1,4 +1,36 @@
 <?php
+
+$valueToSearch = $_GET['ValueToSearch'] ?? "";
+
+?>
+
+<?php
+if(isset($_GET['Search_Btn']))
+{
+
+$valueToSearch = $_GET['ValueToSearch'];
+$query = "SELECT e.Election_Topic as election_name,cd.* FROM `candidate_details` as cd inner join elections as e on cd.election_id = e.id WHERE  CONCAT ( `Candidate_Name`)LIKE '%".$valueToSearch."%'";
+// mysqli_query($con, $query);
+ $search_result = filterTable($query);
+
+}else{
+$query = "SELECT e.Election_Topic as election_name,cd.* FROM `candidate_details` as cd inner join elections as e on cd.election_id = e.id";
+$search_result = filterTable($query);
+}
+
+function filterTable($query)
+{
+
+    $connect = mysqli_connect("localhost","root","","onlinevoting");
+    $filter_Result = mysqli_query($connect, $query);
+    return $filter_Result;
+}
+
+?>
+
+
+
+<?php
 if(isset($_GET['added']))
 {
 ?>
@@ -114,10 +146,19 @@ if(isset($_GET['added']))
     
     <div class="col-8">
         <h3>Candidate Details</h3>
+
+        <div class="container" id="table">
+        <form action="index.php?AddCandidatesPage=1" method="GET">
+        <div id="ab">Fetch Result By:</div>
+        <input type="text" name="ValueToSearch" placeholder="Search Here" value="<?= $valueToSearch?>" />
+            <input type="hidden"  name="AddCandidatesPage"value="1">
+            <input type="submit" value="Filter"  name="Search_Btn" class="btn btn-primary" /><br><br>
+
+
         <table class="table">
-            <thead>
+            <!-- <thead> -->
             <tr>
-             <th scope="col">S.No</th>
+             <th scope="col">ID</th>
              <th scope="col">Photo</th>
              <th scope="col">Name</th>
              <th scope="col">Details</th>
@@ -127,34 +168,17 @@ if(isset($_GET['added']))
 
 
             </tr>
-            </thead>
-                <tbody>
-                    <?php
-                        $FetchData = mysqli_Query($con, "SELECT * FROM candidate_details") or die(mysqli_error($con));
-                        $IsAnyCandidateAdded = mysqli_num_rows($FetchData);
-
-                        if($IsAnyCandidateAdded > 0)
-                        {
-                            $sno = 1;
-                                while($row = mysqli_fetch_assoc($FetchData))
-                                {
-                                   
-
-                                    $Election_id = $row['election_id'];
-                                    $fetchingElectionName = mysqli_query($con, "SELECT * FROM elections WHERE id ='". $Election_id."'") or
-                                    die(mysqli_error($con));
-                                    $execFetchingElectionNameQuery = mysqli_fetch_assoc($fetchingElectionName);
-                                    $election_name = $execFetchingElectionNameQuery['Election_Topic'];
-                                    $candidate_photo = $row['Candidate_Photo'];
-                                    
-                                    $Candidate_id = $row['id'];
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $sno++; ?></td>
-                                        <td> <img src="<?php echo $candidate_photo; ?>" class="Candidate_photo"  />  </td>
+            <?php while($row = mysqli_fetch_array($search_result)) :
+                
+                
+                
+                ?>
+                <tr>
+                                        <td><?php echo $row['id']; ?></td>
+                                        <td> <img src="<?php echo $row['Candidate_Photo'] ?>" class="Candidate_photo"  />  </td>
                                         <td><?php echo $row['Candidate_Name'] ?></td>
                                         <td><?php echo $row['Candidate_Details'] ?></td>
-                                        <td><?php echo  $election_name ?></td>
+                                        <td><?php echo  $row['election_name']; ?></td>
 
                                         
 
@@ -176,8 +200,37 @@ if(isset($_GET['added']))
                                         
                                     
                                     </tr>
+                                    <?php endwhile;?>
+            <!-- </thead> -->
+                <tbody>
+                    <?php
+                        $FetchData = mysqli_Query($con, "SELECT * FROM candidate_details") or die(mysqli_error($con));
+                        $IsAnyCandidateAdded = mysqli_num_rows($FetchData);
+
+                        if($IsAnyCandidateAdded > 0)
+                        {
+                          
+                                while($row = mysqli_fetch_assoc($FetchData))
+                                {
+                                   
+
+                                    $Election_id = $row['election_id'];
+                                    $fetchingElectionName = mysqli_query($con, "SELECT * FROM elections WHERE id ='". $Election_id."'") or
+                                    die(mysqli_error($con));
+                                    $execFetchingElectionNameQuery = mysqli_fetch_assoc($fetchingElectionName);
+                                    $election_name = $execFetchingElectionNameQuery['Election_Topic'];
+                                    // var_dump( $election_name);
+                                    
+                                    
+                                    $Candidate_id = $row['id'];
+                                    ?>
+
+                                    
                                     <?php
                                  }
+                                 ?>
+                                
+                             <?php
                         }else{
                             ?>
                             <tr>
@@ -190,6 +243,10 @@ if(isset($_GET['added']))
    
                 </tbody>
         </table>
+                    
+        </form>
+                    
+        </div>
     </div>
 </div>
 
