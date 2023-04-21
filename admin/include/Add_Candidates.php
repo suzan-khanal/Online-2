@@ -210,25 +210,12 @@ if(isset($_GET['added']))
                         if($IsAnyCandidateAdded > 0)
                         {
                           
-                                while($row = mysqli_fetch_assoc($FetchData))
-                                {
-                                   
+                               
 
-                                    $Election_id = $row['election_id'];
-                                    $fetchingElectionName = mysqli_query($con, "SELECT * FROM elections WHERE id ='". $Election_id."'") or
-                                    die(mysqli_error($con));
-                                    $execFetchingElectionNameQuery = mysqli_fetch_assoc($fetchingElectionName);
-                                    $election_name = $execFetchingElectionNameQuery['Election_Topic'];
-                                    // var_dump( $election_name);
-                                    
-                                    
-                                    $Candidate_id = $row['id'];
                                     ?>
 
                                     
-                                    <?php
-                                 }
-                                 ?>
+                                  
                                 
                              <?php
                         }else{
