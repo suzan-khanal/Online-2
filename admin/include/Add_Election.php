@@ -308,9 +308,13 @@ $diff=date_diff($date1,$date2);
 if((int)$diff->format("%R%a") > 0)
 {
     $Status = "Inactive";
-}else{
+    
+}
+else{
     $Status = "Active";
 }
+
+
 
 
 // Inserting into Database.

@@ -12,6 +12,10 @@
     <li class="nav-item">
         <a class="nav-link text-white mr-3" href="Homepage.php">Homepage</a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-white mr-3" href="PublishedElections.php">Published-Elections</a>
+      </li>
     
       <!-- <li class="nav-item">
         <a class="nav-link text-white mr-3" href="Voter_Dashboard.php">Home</a>
