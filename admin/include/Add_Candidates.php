@@ -187,8 +187,7 @@ if(isset($_GET['added']))
                                         <td>
                                             <a href="updatecandidate.php?updateid=<?= $row['id'] ?>" class="btn btn-sm btn-warning"> Edit </a>
                                             <!-- <a href="#" class="btn btn-sm btn-danger"> Delete </a> -->
-                                            <button class="btn btn-sm btn-danger" onclick="DeleteData(<?php echo 
-                                            $Candidate_id;?>)"> Delete </button>
+                                            <button class="btn btn-sm btn-danger" onclick="DeleteData(<?php echo  $row['id'];?>)"> Delete </button>
 
                                         </td>
 

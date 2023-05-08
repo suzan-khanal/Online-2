@@ -71,9 +71,28 @@ $Election_id = $row['id'];
                         }else{
                            
                             ?>
-                            <button class="btn btn-md btn-success" onclick="castvote(<?php echo  $Election_id;?>, 
-                            <?php  echo $candidate_id;?>, <?php  echo $_SESSION['user_id'];?> )"> Vote </button>  
-  
+
+                            
+                            <button class="btn btn-md btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal"> Vote </button> 
+
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Confirmation</h1>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are You Sure You Want to Vote?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary"  onclick="castvote(<?php echo  $Election_id;?>,   <?php  echo $candidate_id;?>, <?php  echo $_SESSION['user_id'];?> )">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
                             <?php

@@ -195,8 +195,7 @@ if(isset($_GET['Updated']))
                 <td><?php  echo $row['Status']; ?></td>
                 <td>
                                            <a href="update.php?updateid=<?= $row['id'] ?>" class="btn btn-sm btn-warning"> Edit </a>
-                                            <button class="btn btn-sm btn-danger" onclick="DeleteData(<?php echo 
-                                            $election_id;?>)"> Delete </button>
+                                            <button class="btn btn-sm btn-danger" onclick="DeleteData(<?php echo $row['id']; ?>)"> Delete </button>
 
                                         </td>
 
