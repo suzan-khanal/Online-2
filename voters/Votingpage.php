@@ -23,7 +23,7 @@ $Election_id = $row['id'];
         <tr>
             <th> Candidate Photo</th>
             <th> Candidate Details</th>
-            <th> Votes</th>
+            <!-- <th> Votes</th> -->
             <th> Action</th>
 
         </tr>
@@ -47,7 +47,10 @@ $Election_id = $row['id'];
                 <tr>
                     <td><img src="<?php echo $candidate_Photo ?> " class="Candidate_photo"></td>
                     <td><?php echo "<b>".$candidateData['Candidate_Name'] ."</b><br />" .$candidateData['Candidate_Details'];  ?></td>
-                    <td><?php echo $TotalVotes; ?> </td>
+                    <!-- <td><?php 
+                    // echo $TotalVotes;
+                     ?> 
+                     </td> -->
                     
                      <td>
                         <?php
